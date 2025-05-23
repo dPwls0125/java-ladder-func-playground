@@ -10,9 +10,21 @@ public class RandomBooleansGenerator {
 
     public static List<Boolean> generateRandomBooleans(final int size) {
         List<Boolean> result = new ArrayList<>();
+        boolean prev = false;
+
         for (int i = 0; i < size; i++) {
-            result.add(random.nextBoolean());
+            boolean current = generateNext(prev);
+            result.add(current);
+            prev = current;
         }
         return result;
     }
+
+    private static boolean generateNext(boolean prev) {
+        if (prev) {
+            return false;
+        }
+        return random.nextBoolean();
+    }
+
 }

@@ -9,6 +9,7 @@ public class Ladder {
     private final List<Line> lines;
 
     private Ladder(final LadderScale ladderScale, final List<Line> lines) {
+        validateLadderHeight(lines);
         this.lines = lines;
         this.ladderScale = ladderScale;
     }
@@ -25,4 +26,14 @@ public class Ladder {
         return Collections.unmodifiableList(lines);
     }
 
+    private void validateLadderHeight(final List<Line> lines) {
+        if (lines.size() != ladderScale.getHeight())
+            throw new invalidLadderHeightException("사다리의 높이는 ladderScale.getHeight와 같아야 합니다.");
+    }
+
+    private static class invalidLadderHeightException extends IllegalArgumentException {
+        public invalidLadderHeightException(final String s) {
+            super(s);
+        }
+    }
 }
