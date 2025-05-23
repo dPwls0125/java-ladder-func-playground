@@ -6,9 +6,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LineTest {
     @Test
-    @DisplayName("정적 팩토리 메서드 create()로 생성된 Line 객체의 points 사이즈는 3이다.")
+    @DisplayName("정적 팩토리 메서드 create()로 생성된 Line 객체의 points 리스트의 길이는 width-1 이다.")
     void whenCreatedByStaticFactoryMethod_thenHasValidLinesSize() {
-        Line line = Line.create();
-        assertThat(line.getPoints()).hasSize(3);
+        int width = 3;
+        int expectedPointsSize = width - 1;
+
+        Line line = Line.create(width);
+
+        assertThat(line.getPoints()).hasSize(expectedPointsSize);
     }
 }

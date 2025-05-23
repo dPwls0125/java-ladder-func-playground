@@ -5,33 +5,24 @@ import java.util.Collections;
 import java.util.List;
 
 public class Ladder {
-    private static final int LADDER_HEIGHT = 4;
+    private final LadderScale ladderScale;
     private final List<Line> lines;
 
-    private Ladder(final List<Line> lines) {
-        validateLadderHeight(lines);
+    private Ladder(final LadderScale ladderScale, final List<Line> lines) {
         this.lines = lines;
+        this.ladderScale = ladderScale;
     }
 
-    public static Ladder create() {
+    public static Ladder create(final LadderScale ladderScale) {
         List<Line> lines = new ArrayList<>();
-        for (int i = 0; i < LADDER_HEIGHT; i++) {
-            lines.add(Line.create());
+        for (int i = 0; i < ladderScale.getHeight(); i++) {
+            lines.add(Line.create(ladderScale.getWidth()));
         }
-        return new Ladder(lines);
+        return new Ladder(ladderScale, lines);
     }
 
     public List<Line> getLines() {
         return Collections.unmodifiableList(lines);
     }
 
-    private void validateLadderHeight(final List<Line> lines) {
-        if (lines.size() != LADDER_HEIGHT) throw new invalidLadderHeightException("사다리의 높이는 4이어야 합니다.");
-    }
-
-    private static class invalidLadderHeightException extends IllegalArgumentException {
-        public invalidLadderHeightException(final String s) {
-            super(s);
-        }
-    }
 }

@@ -5,22 +5,21 @@ import java.util.Collections;
 import java.util.List;
 
 public class Line {
-
-    private static final int LINE_WIDTH = 4;
-    private static final int LINE_CONNECTION = LINE_WIDTH - 1;
     private final List<Boolean> points;
 
     private Line(final List<Boolean> points) {
-        validateLineWidth(points);
         this.points = new ArrayList<>(points);
     }
 
-    public static Line create() {
-        return new Line(RandomBooleansGenerator.generateRandomBooleans(LINE_CONNECTION));
+    public static Line create(final int width) {
+        int lineConnectionNumber = width - 1;
+        List<Boolean> points = RandomBooleansGenerator.generateRandomBooleans(lineConnectionNumber);
+        validatePointsSize(points, lineConnectionNumber);
+        return new Line(points);
     }
 
-    private void validateLineWidth(final List<Boolean> points) {
-        if (points.size() != LINE_CONNECTION) throw new invalidLineWidthException("사다리간 연결 지점은 3이어야 합니다.");
+    private static void validatePointsSize(final List<Boolean> points, final int expectedSize) {
+        if (points.size() != expectedSize) throw new invalidLineWidthException("사다리간 연결 지점은 width-1개여야 합니다.");
     }
 
     public List<Boolean> getPoints() {

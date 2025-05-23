@@ -6,6 +6,7 @@ import domain.Line;
 public class OutputView {
 
     public static void printLadder(Ladder ladder) {
+        System.out.println("실행 결과");
         ladder.getLines().forEach(OutputView::printLine);
     }
 
