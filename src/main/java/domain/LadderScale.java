@@ -24,7 +24,6 @@ public class LadderScale {
         }
     }
 
-
     public int getHeight() {
         return height;
     }
