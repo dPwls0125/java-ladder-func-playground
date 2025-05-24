@@ -3,6 +3,7 @@ package domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class Line {
     private final List<Boolean> points;
@@ -34,5 +35,17 @@ public class Line {
         public invalidLineWidthException(final String s) {
             super(s);
         }
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Line line)) return false;
+        return Objects.equals(getPoints(), line.getPoints());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getPoints());
     }
 }

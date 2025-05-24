@@ -3,6 +3,7 @@ package domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class Ladder {
     private final LadderScale ladderScale;
@@ -48,5 +49,17 @@ public class Ladder {
         public invalidLadderHeightException(final String s) {
             super(s);
         }
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Ladder ladder)) return false;
+        return Objects.equals(getLadderScale(), ladder.getLadderScale()) && Objects.equals(getLines(), ladder.getLines());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getLadderScale(), getLines());
     }
 }

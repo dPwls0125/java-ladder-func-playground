@@ -1,28 +1,37 @@
 package view;
 
-import domain.LadderScale;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
 
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static LadderScale induceLadderScaleToBeEnteredAndReturn() {
-
-        System.out.println("사다리의 넓이는 몇 개인가요?");
-        int width = readIntAndClearBuffer();
-
-        System.out.println("사다리의 높이는 몇 개인가요?");
-        int height = readIntAndClearBuffer();
-
-        return new LadderScale(width, height);
+    public static List<String> induceParticipantsToBeEnteredAndReturn() {
+        System.out.println("참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)");
+        String[] participants = scanner.nextLine().split(",");
+        return Arrays.stream(participants).toList();
     }
 
-    private static int readIntAndClearBuffer() {
-        int number = scanner.nextInt();
+    public static List<String> induceRewardsToBeEnteredAndReturn() {
+        System.out.println("\n실행 결과를 입력하세요. (결과는 쉼표(,)로 구분하세요)");
+        String[] result = scanner.nextLine().split(",");
+        return Arrays.stream(result).toList();
+    }
+
+    public static int induceLadderHeightToBeEnteredAndReturn() {
+        System.out.println("최대 사다리 높이는 몇 개인가요?");
+        int height = scanner.nextInt();
         scanner.nextLine();
-        return number;
+        return height;
     }
+
+    public static String induceToQueryRewardForParticipant() {
+        System.out.println("\n결과를 보고 싶은 사람은?");
+        return scanner.nextLine().trim();
+    }
+
 }
 
