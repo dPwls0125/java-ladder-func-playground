@@ -1,14 +1,13 @@
-package domain;
+package util;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class RandomBooleansGenerator {
-
+public class RandomBooleansGenerator implements BooleansGenerator {
     private static final Random random = new Random();
 
-    public static List<Boolean> generateRandomBooleans(final int size) {
+    public List<Boolean> generateBooleans(final int size) {
         List<Boolean> result = new ArrayList<>();
         boolean prev = false;
 
@@ -20,7 +19,7 @@ public class RandomBooleansGenerator {
         return result;
     }
 
-    private static boolean generateNext(boolean prev) {
+    private boolean generateNext(boolean prev) {
         if (prev) {
             return false;
         }

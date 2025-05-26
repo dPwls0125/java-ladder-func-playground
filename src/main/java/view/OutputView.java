@@ -1,48 +1,50 @@
 package view;
 
-import domain.*;
+import model.dto.LadderGameDto;
+import model.dto.LineDto;
 
 import java.util.List;
 import java.util.Map;
 
 public class OutputView {
 
-    public static void printLadder(Ladder ladder, Participants participants, Rewards rewards) {
+    public static void printLadderResult(final LadderGameDto dto) {
         System.out.println("사다리 결과");
-        printParticipants(participants.getNames());
-        ladder.getLines().forEach(OutputView::printLine);
-        printRewards(rewards.getRewards());
+        printParticipants(dto.getParticipants());
+        printLadder(dto.getLines());
+        printRewards(dto.getRewards());
     }
 
-    public static void printRewards(List<String> rewards) {
-        rewards.forEach(
-                reward -> System.out.print(reward + " ".repeat(5 - reward.length()))
-        );
-        System.out.println();
-    }
-
-    public static void printAllResults(Map<String, String> resultMap) {
+    public static void printExecutedResult(final Map<String, String> resultMap) {
         System.out.println("\n실행 결과");
         resultMap.forEach((name, result) -> System.out.println(name + " : " + result));
     }
 
-    public static void printResultFor(String reward) {
+    public static void printResultFor(final String reward) {
         System.out.println("실행 결과");
         System.out.println(reward);
     }
 
-    private static void printParticipants(List<String> participants) {
-        participants.forEach(
-                participant -> System.out.print(participant + " ".repeat(5 - participant.length()))
-        );
+    private static void printRewards(final List<String> rewards) {
+        rewards.forEach(reward -> System.out.printf("%-5s", reward));
         System.out.println();
     }
 
-    private static void printLine(Line line) {
-        line.getPoints().forEach(
+    private static void printParticipants(final List<String> participants) {
+        participants.forEach(
+                participant -> System.out.printf("%-5s", participant));
+        System.out.println();
+    }
+
+    private static void printLadder(List<LineDto> lines) {
+        lines.forEach(OutputView::printLine);
+    }
+
+    private static void printLine(LineDto dto) {
+        dto.getPoints().forEach(
                 point -> {
-                    if (point) System.out.print("|----");
-                    if (!point) System.out.print("|    ");
+                    if (point) System.out.print("|-----");
+                    if (!point) System.out.print("|     ");
                 });
         System.out.print("|\n");
     }

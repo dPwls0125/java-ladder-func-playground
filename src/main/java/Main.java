@@ -1,10 +1,11 @@
-import domain.LadderGame;
-import manager.LadderManager;
+import controller.LadderController;
+import model.LadderGame;
+import util.RandomBooleansGenerator;
 
 public class Main {
     public static void main(String[] args) {
-        LadderManager ladderManager = new LadderManager();
-        LadderGame ladderGame = ladderManager.getAndShowRandomLadder();
-        ladderManager.showResult(ladderGame);
+        LadderController ladderController = new LadderController(new RandomBooleansGenerator());
+        LadderGame ladderGame = ladderController.createGameAndPrintLadder();
+        ladderController.printGameResult(ladderGame);
     }
 }
